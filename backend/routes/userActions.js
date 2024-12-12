@@ -23,17 +23,40 @@ function distanceBetween(lat1, lon1, lat2, lon2) {
 
 // Get all venues with filtering, event counts, and distance
 router.get('/venues', authenticateToken, async (req, res) => {
-  const { q, category, distance, lat, lng } = req.query;
+  const { q, cat1, distance, lat, lng } = req.query;
   let query = {};
 
   if (q) {
     query.venuee = { $regex: q, $options: 'i' }; // Search by name
   }
-  if (category) {
-    query.category = category; // Filter by category
-  }
 
   let venues = await Venue.find(query);
+
+  // Populate category field from events
+  const venueIds = venues.map(v => v.venueId);
+  const events = await Event.find({ venueid: { $in: venueIds } });
+
+  const venueCategoryMap = {};
+  events.forEach(event => {
+    if (!venueCategoryMap[event.venueid]) {
+      venueCategoryMap[event.venueid] = new Set();
+    }
+    venueCategoryMap[event.venueid].add(event.cat1);
+  });
+
+  // Update venue categories in the database and local object
+  for (const venue of venues) {
+    const categories = venueCategoryMap[venue.venueId]
+      ? Array.from(venueCategoryMap[venue.venueId])
+      : [];
+    venue.category = categories; // Update in memory
+    await Venue.updateOne({ venueId: venue.venueId }, { $set: { category: categories } }); // Save to DB
+  }
+
+  // Filter by category
+  if (cat1) {
+    venues = venues.filter(v => v.category.includes(cat1));
+  }
 
   // Calculate distance for each venue (if lat/lng are provided)
   const userLat = parseFloat(lat);
