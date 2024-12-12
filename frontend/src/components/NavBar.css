@@ -1,0 +1,103 @@
+/* src/components/NavBar.css */
+
+/* Navbar Container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Branding */
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #007bff;
+    text-decoration: none;
+}
+
+/* Navigation Links */
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+}
+
+    .nav-links li {
+        position: relative;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #333333;
+        font-size: 1rem;
+        transition: color 0.3s ease;
+    }
+
+        .nav-links a:hover,
+        .nav-links a:focus {
+            color: #007bff;
+        }
+
+        /* Active Link */
+        .nav-links a.active {
+            color: #007bff;
+            font-weight: 600;
+        }
+
+/* Authentication Section */
+.auth-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+    .auth-section a,
+    .auth-section button {
+        text-decoration: none;
+        color: #333333;
+        font-size: 1rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+        .auth-section a:hover,
+        .auth-section a:focus,
+        .auth-section button:hover,
+        .auth-section button:focus {
+            color: #007bff;
+        }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        width: 100%;
+    }
+
+        .nav-links li {
+            width: 100%;
+        }
+
+        .nav-links a {
+            display: block;
+            width: 100%;
+            padding: 0.5rem 0;
+        }
+
+    .auth-section {
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 1rem;
+    }
+}
