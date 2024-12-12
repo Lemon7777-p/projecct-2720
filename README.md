@@ -1,4 +1,3 @@
-
 # projecct-2720
 
 ## backend setup:
@@ -20,3 +19,6 @@ cd backend
 node createTestUsers.js
 ```
 2 users with username "**teestuser**" and "**testadmin**" will be created with password "**password123**"
+
+
+> *events.xml and events.xml are raw data from https://data.gov.hk/en-data/dataset/hk-lcsd-event-event-cultural**
