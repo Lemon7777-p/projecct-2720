@@ -42,7 +42,6 @@ function Venues() {
       setFavorites(data.map(f => f.venueId));
     } catch (error) {
       console.error(error);
-      // Optionally, set an error state here to inform the user
     }
   };
 
@@ -50,7 +49,7 @@ function Venues() {
     try {
       const params = new URLSearchParams();
       if (query) params.append('q', query);
-      if (category) params.append('category', category);
+      if (category) params.append('cat1', category); // Use "cat1" to filter by event category
       if (distance > 0 && userLocation.lat && userLocation.lng) {
         params.append('distance', distance);
         params.append('lat', userLocation.lat);
@@ -74,7 +73,6 @@ function Venues() {
       setVenues(sorted);
     } catch (error) {
       console.error(error);
-      // Optionally, set an error state here to inform the user
     }
   };
 
@@ -105,7 +103,6 @@ function Venues() {
       }
     } catch (error) {
       console.error(error);
-      // Optionally, set an error state here to inform the user
     }
   };
 
@@ -136,8 +133,8 @@ function Venues() {
           >
             <option value="">All</option>
             <option value="inc4">inc4</option>
-            <option value="inc4sc5">inc4sc5</option>
-            {/* Add more categories as needed */}
+            <option value="inc6">inc6</option>
+            <option value="inc7">inc7</option>
           </select>
         </div>
 

@@ -10,7 +10,7 @@ function Events() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const eventsPerPage = 10;
+  const eventsPerPage = 100;
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -74,6 +74,7 @@ function Events() {
             <thead>
               <tr>
                 <th scope="col">Title</th>
+				<th scope="col">Category</th>
                 <th scope="col">Date</th>
                 <th scope="col">Venue</th>
               </tr>
@@ -83,6 +84,7 @@ function Events() {
                 currentEvents.map((e) => (
                   <tr key={e._id}>
                     <td>{e.titlee}</td>
+					<td>{e.cat1}</td>
                     <td>{e.predateE}</td> {/* Displaying date as string */}
                     <td>{e.venueid}</td>
                   </tr>
