@@ -61,9 +61,14 @@
             color: #555555;
         }
 
+.EventComentContainer{
+    display: flex;
+}
+
 /* Events List */
 .events-section {
     margin-bottom: 2rem;
+    flex: 1;
 }
 
     .events-section h3 {
@@ -84,6 +89,7 @@
 /* Comments Section */
 .comments-section {
     margin-bottom: 2rem;
+    flex: 1;
 }
 
     .comments-section h3 {

@@ -250,6 +250,8 @@ function VenueDetails() {
         {/* Add more venue information as needed */}
       </div>
 
+      <div className="EventComentContainer">
+
       {/* Events List */}
       <div className="events-section">
         <h3>Events at this Venue:</h3>
@@ -289,6 +291,8 @@ function VenueDetails() {
           />
           <button onClick={addComment}>Submit Comment</button>
         </div>
+      </div>
+
       </div>
     </div>
   );
