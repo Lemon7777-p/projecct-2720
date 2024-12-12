@@ -40,7 +40,7 @@ function MapPage() {
           .setLngLat([parseFloat(venue.longitude), parseFloat(venue.latitude)])
           .setPopup(
             new mapboxgl.Popup({ offset: 25 }).setHTML(
-              `<h3>${venue.venuee}</h3><p>${venue.latitude}, ${venue.longitude}</p>`
+              `<h3>${venue.venuee}</h3><p>${venue.latitude}, ${venue.longitude}</p><a href="/venue/${venue.venueId}" style="color: blue; text-decoration: underline;">View Details</a>`
             )
           ) // Add popup to show venue details
           .addTo(mapRef.current);
