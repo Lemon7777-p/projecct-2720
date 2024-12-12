@@ -4,14 +4,14 @@
 
 ```
 npm install express mongoose cors jsonwebtoken bcrypt
+npm start
 ```
-
 ## frontend setup:
 
 ```
 npm install react-router-dom react-map-gl mapbox-gl
+npm start
 ```
-
 ## create user:
 
 ```
