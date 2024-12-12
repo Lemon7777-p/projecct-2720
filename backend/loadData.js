@@ -27,6 +27,7 @@ async function loadEvents() {
   // Assuming xml2js returns the fields as strings directly:
   const eventsToInsert = eventsArray.map(e => ({
     titlee: e.titlee || '',
+	cat1: e.cat1 || '',
     venueid: e.venueid || '',
     predateE: e.predateE || '', 
     desce: e.desce || '',
