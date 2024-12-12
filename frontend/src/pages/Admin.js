@@ -6,7 +6,7 @@ function Admin() {
   const { token } = useContext(AuthContext);
   const [events, setEvents] = useState([]);
   const [users, setUsers] = useState([]);
-  const [newEvent, setNewEvent] = useState({ titlee: '', venueid: '', predateE: '' });
+  const [newEvent, setNewEvent] = useState({ titlee: '', venueid: '', predateE: '', cat1: '' });
   const [newUser, setNewUser] = useState({ username: '', password: '', role: 'user' });
   const [editEvent, setEditEvent] = useState(null); // Event to edit
   const [editUser, setEditUser] = useState(null); // User to edit
@@ -43,7 +43,7 @@ function Admin() {
     });
     if (res.ok) {
       fetchEvents();
-      setNewEvent({ titlee: '', venueid: '', predateE: '' });
+      setNewEvent({ titlee: '', venueid: '', predateE: '', cat1: '' });
     }
   };
 
@@ -132,6 +132,7 @@ function Admin() {
               <th style={{ border: '1px solid #ddd', padding: '8px' }}>Title</th>
               <th style={{ border: '1px solid #ddd', padding: '8px' }}>Venue ID</th>
               <th style={{ border: '1px solid #ddd', padding: '8px' }}>Date</th>
+              <th style={{ border: '1px solid #ddd', padding: '8px' }}>Category</th>
               <th style={{ border: '1px solid #ddd', padding: '8px' }}>Actions</th>
             </tr>
           </thead>
@@ -141,6 +142,7 @@ function Admin() {
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}>{event.titlee}</td>
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}>{event.venueid}</td>
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}>{event.predateE}</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>{event.cat1}</td>
                 <td style={{ border: '1px solid #ddd', padding: '8px' }}>
                   <button
                     onClick={() => setEditEvent(event)}
@@ -181,6 +183,16 @@ function Admin() {
               onChange={(e) => setEditEvent({ ...editEvent, predateE: e.target.value })}
               style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
             />
+            <select
+              value={editEvent.cat11}
+              onChange={(e) => setEditEvent({ ...editEvent, cat1: e.target.value })}
+              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+            >
+              <option value="">Select Category</option>
+              <option value="inc4">inc4</option>
+              <option value="inc6">inc6</option>
+              <option value="inc7">inc7</option>
+            </select>
             <button onClick={handleEventUpdate} style={{ marginRight: '10px' }}>
               Update
             </button>
@@ -207,6 +219,16 @@ function Admin() {
               onChange={(e) => setNewEvent({ ...newEvent, predateE: e.target.value })}
               style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
             />
+            <select
+              value={newEvent.cat1}
+              onChange={(e) => setNewEvent({ ...newEvent, cat1: e.target.value })}
+              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+            >
+              <option value="">Select Category</option>
+              <option value="inc4">inc4</option>
+              <option value="inc6">inc6</option>
+              <option value="inc7">inc7</option>
+            </select>
             <button onClick={handleEventCreate}>Create</button>
           </div>
         )}
