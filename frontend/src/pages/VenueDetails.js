@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import './VenueDetails.css'; // Import the CSS file
 
 // Haversine formula to calculate distance between two coordinates
 const calculateDistance = (lat1, lng1, lat2, lng2) => {
@@ -36,6 +37,7 @@ function VenueDetails() {
   const [newComment, setNewComment] = useState('');
   const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const mapContainerRef = useRef(null);
   const mapRef = useRef(null);
@@ -58,34 +60,35 @@ function VenueDetails() {
         (err) => {
           console.error('Error fetching user location:', err);
           setError('Unable to retrieve your location. Distance will be unavailable.');
-          // Optionally, set a default location or proceed without user location
+          // Proceed without user location
+          setUserLocation({ lat: null, lng: null });
         }
       );
     } else {
       setError('Geolocation is not supported by your browser.');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, token]);
 
   // Effect to fetch venue details once user location is available
   useEffect(() => {
-    if (userLocation.lat && userLocation.lng) {
-      fetchVenueDetails();
-    } else if (userLocation.lat === null && userLocation.lng === null) {
-      // If user denied geolocation or it's not available, fetch without lat/lng
-      fetchVenueDetails();
-    }
+    fetchVenueDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userLocation]);
 
   // Function to fetch venue details from the backend
   const fetchVenueDetails = async () => {
+    setLoading(true);
     try {
-      const res = await fetch(
-        `http://localhost:4000/user/venues/${id}?lat=${userLocation.lat || ''}&lng=${userLocation.lng || ''}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const params = new URLSearchParams();
+      if (userLocation.lat && userLocation.lng) {
+        params.append('lat', userLocation.lat);
+        params.append('lng', userLocation.lng);
+      }
+
+      const res = await fetch(`http://localhost:4000/user/venues/${id}?${params.toString()}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       if (res.ok) {
         const data = await res.json();
@@ -98,6 +101,8 @@ function VenueDetails() {
     } catch (error) {
       console.error('Error fetching venue details:', error);
       setError('An error occurred while fetching venue details.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -201,8 +206,13 @@ function VenueDetails() {
     }
   };
 
-  // If venue data is still loading
-  if (!venueData) return <div>Loading...</div>;
+  // If data is still loading
+  if (loading) return <div className="loading">Loading...</div>;
+
+  // If there's an error
+  if (error) return <div className="error-message">{error}</div>;
+
+  if (!venueData) return null;
 
   const { venue, events } = venueData;
 
@@ -215,54 +225,71 @@ function VenueDetails() {
   );
 
   return (
-    <div style={{ padding: '1rem' }}>
-      <h2>{venue.venuee}</h2>
-      <p>Venue ID: {venue.venueId}</p>
-      <p>Distance to You: {distance}</p>
+    <div className="venue-details-container">
+      {/* Header Section */}
+      <div className="venue-header">
+        <h2>{venue.venuee}</h2>
+        <p>Venue ID: {venue.venueId}</p>
+        <p>Distance to You: {distance}</p>
+      </div>
 
       {/* Map Section */}
-      <div
-        ref={mapContainerRef}
-        style={{
-          width: '100%',
-          height: '400px', // Adjust height as needed
-          marginTop: '1rem',
-        }}
-      />
+      <div ref={mapContainerRef} className="map-section" />
 
-      <h3>Events at this Venue:</h3>
-      <ul>
-        {events.map((e) => (
-          <li key={e._id}>{e.titlee}</li>
-        ))}
-      </ul>
+      {/* Venue Information */}
+      <div className="venue-info">
+        <div>
+          <h3>Location</h3>
+          <p>Latitude: {venue.latitude || 'N/A'}</p>
+          <p>Longitude: {venue.longitude || 'N/A'}</p>
+        </div>
+        <div>
+          <h3>Number of Events</h3>
+          <p>{events.length}</p>
+        </div>
+        {/* Add more venue information as needed */}
+      </div>
 
-      <h3>Comments:</h3>
-      {comments.length === 0 ? (
-        <p>No comments yet. Be the first to comment!</p>
-      ) : (
-        <ul>
-          {comments.map((comment) => (
-            <li key={comment._id}>
-              <strong>{comment.user}</strong>: {comment.text}
-            </li>
-          ))}
-        </ul>
-      )}
+      {/* Events List */}
+      <div className="events-section">
+        <h3>Events at this Venue:</h3>
+        {events.length > 0 ? (
+          <ul className="events-list">
+            {events.map((e) => (
+              <li key={e._id}>{e.titlee}</li>
+            ))}
+          </ul>
+        ) : (
+          <p>No events scheduled at this venue.</p>
+        )}
+      </div>
 
-      <textarea
-        value={newComment}
-        onChange={(e) => setNewComment(e.target.value)}
-        placeholder="Add your comment here..."
-        rows="3"
-        style={{ width: '100%', marginTop: '1rem' }}
-      />
-      <button onClick={addComment} style={{ marginTop: '0.5rem' }}>
-        Submit Comment
-      </button>
+      {/* Comments Section */}
+      <div className="comments-section">
+        <h3>Comments:</h3>
+        {comments.length === 0 ? (
+          <p>No comments yet. Be the first to comment!</p>
+        ) : (
+          <ul className="comments-list">
+            {comments.map((comment) => (
+              <li key={comment._id}>
+                <strong>{comment.user}</strong>: {comment.text}
+              </li>
+            ))}
+          </ul>
+        )}
 
-      {/* Display error messages if any */}
-      {error && <div style={{ color: 'red', marginTop: '1rem' }}>{error}</div>}
+        {/* Add Comment Form */}
+        <div className="comment-form">
+          <textarea
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Add your comment here..."
+            rows="3"
+          />
+          <button onClick={addComment}>Submit Comment</button>
+        </div>
+      </div>
     </div>
   );
 }
