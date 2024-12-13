@@ -18,13 +18,18 @@ function NavBar() {
     <nav className="navbar">
       {/* Branding Section */}
       <Link to="/" className="navbar-brand">
-        NavBar
+        Cultural Programme Finder
       </Link>
 
       {/* Navigation Links */}
       <ul className="nav-links">
         <li>
           <Link to="/" className={isActive('/') ? 'active' : ''}>
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link to="/venue" className={isActive('/') ? 'active' : ''}>
             List of Locations
           </Link>
         </li>

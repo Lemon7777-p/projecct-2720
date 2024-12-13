@@ -10,6 +10,7 @@ import Favorites from './pages/Favorites';
 import VenueDetails from './pages/VenueDetails';
 import Login from './pages/Login';
 import Admin from './pages/Admin';
+import HomePage from './pages/HomePage';
 
 function PrivateRoute({ children, requireAdmin = false }) {
   return (
@@ -30,7 +31,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<PrivateRoute><Venues /></PrivateRoute>} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/venue" element={<PrivateRoute><Venues /></PrivateRoute>} />
           <Route path="/events" element={<PrivateRoute><Events /></PrivateRoute>} />
           <Route path="/map" element={<PrivateRoute><MapPage /></PrivateRoute>} />
           <Route path="/favorites" element={<PrivateRoute><Favorites /></PrivateRoute>} />

@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .content {
+    flex: 1;
+  }
+  
+  .footer {
+    text-align: left;
+    padding: 10px;
+    background-color: #f1f1f1;
+  }
+  
+  .footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 0; /* Add space between footer items */
+  }
+  
+  .footer-content p {
+    margin: 0 10px 0 0; /* Adjust margin as needed */
+    font-size: 14px;
+  }
+  
+  .footer-image {
+    height: 40px; /* Set a fixed height for both images */
+    margin-left: 10px; /* Add margin between images */
+  }
+  
