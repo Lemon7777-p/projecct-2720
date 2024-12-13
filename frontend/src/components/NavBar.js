@@ -29,7 +29,7 @@ function NavBar() {
           </Link>
         </li>
         <li>
-          <Link to="/venue" className={isActive('/') ? 'active' : ''}>
+          <Link to="/venue" className={isActive('/venue') ? 'active' : ''}>
             List of Locations
           </Link>
         </li>
