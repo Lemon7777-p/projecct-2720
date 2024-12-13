@@ -11,6 +11,14 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.navbar.light {
+    background-color: lightgray;
+}
+  
+.navbar.dark {
+    background-color: darkgray;
+}
+
 /* Branding */
 .navbar-brand {
     font-size: 1.5rem;
@@ -22,31 +30,33 @@
 /* Navigation Links */
 .nav-links {
     display: flex;
+    justify-content: center; /* Center-align the navigation links */
     gap: 1.5rem;
     list-style: none;
+    flex: 1; /* Allow nav-links to take up available space */
 }
 
-    .nav-links li {
-        position: relative;
-    }
+.nav-links li {
+    position: relative;
+}
 
-    .nav-links a {
-        text-decoration: none;
-        color: #333333;
-        font-size: 1rem;
-        transition: color 0.3s ease;
-    }
+.nav-links a {
+    text-decoration: none;
+    color: #333333;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
 
-        .nav-links a:hover,
-        .nav-links a:focus {
-            color: #007bff;
-        }
+.nav-links a:hover,
+.nav-links a:focus {
+    color: #007bff;
+}
 
-        /* Active Link */
-        .nav-links a.active {
-            color: #007bff;
-            font-weight: 600;
-        }
+/* Active Link */
+.nav-links a.active {
+    color: #007bff;
+    font-weight: 600;
+}
 
 /* Authentication Section */
 .auth-section {
@@ -55,23 +65,39 @@
     gap: 1rem;
 }
 
-    .auth-section a,
-    .auth-section button {
-        text-decoration: none;
-        color: #333333;
-        font-size: 1rem;
-        background: none;
-        border: none;
-        cursor: pointer;
-        transition: color 0.3s ease;
-    }
+.auth-section a,
+.auth-section button {
+    text-decoration: none;
+    color: #333333;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
 
-        .auth-section a:hover,
-        .auth-section a:focus,
-        .auth-section button:hover,
-        .auth-section button:focus {
-            color: #007bff;
-        }
+.auth-section a:hover,
+.auth-section a:focus,
+.auth-section button:hover,
+.auth-section button:focus {
+    color: #007bff;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+    text-decoration: none;
+    color: #333333;
+    font-size: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.theme-toggle-btn:hover,
+.theme-toggle-btn:focus {
+    color: #007bff;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -85,15 +111,15 @@
         width: 100%;
     }
 
-        .nav-links li {
-            width: 100%;
-        }
+    .nav-links li {
+        width: 100%;
+    }
 
-        .nav-links a {
-            display: block;
-            width: 100%;
-            padding: 0.5rem 0;
-        }
+    .nav-links a {
+        display: block;
+        width: 100%;
+        padding: 0.5rem 0;
+    }
 
     .auth-section {
         width: 100%;

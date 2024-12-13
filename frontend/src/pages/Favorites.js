@@ -2,11 +2,13 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../AuthContext';
+import { ThemeContext } from '../ThemeContext'; // Import ThemeContext
 import { Link } from 'react-router-dom';
 import './Favorites.css'; // Import the CSS file
 
 function Favorites() {
   const { token } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext); // Use ThemeContext
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -57,7 +59,7 @@ function Favorites() {
   };
 
   return (
-    <div className="favorites-container">
+    <div className={`favorites-container ${theme}`}>
       {/* Header Section */}
       <div className="favorites-header">
         <h2>Your Favorite Venues</h2>

@@ -3,6 +3,7 @@
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
+import { ThemeContext } from '../ThemeContext'; // Import ThemeContext
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import './VenueDetails.css'; // Import the CSS file
@@ -31,6 +32,7 @@ const calculateDistance = (lat1, lng1, lat2, lng2) => {
 
 function VenueDetails() {
   const { token } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext); // Use ThemeContext
   const { id } = useParams();
   const [venueData, setVenueData] = useState(null);
   const [comments, setComments] = useState([]);
@@ -225,7 +227,7 @@ function VenueDetails() {
   );
 
   return (
-    <div className="venue-details-container">
+    <div className={`venue-details-container ${theme}`}>
       {/* Header Section */}
       <div className="venue-header">
         <h2>{venue.venuee}</h2>
@@ -251,48 +253,46 @@ function VenueDetails() {
       </div>
 
       <div className="EventComentContainer">
-
-      {/* Events List */}
-      <div className="events-section">
-        <h3>Events at this Venue:</h3>
-        {events.length > 0 ? (
-          <ul className="events-list">
-            {events.map((e) => (
-              <li key={e._id}>{e.titlee}</li>
-            ))}
-          </ul>
-        ) : (
-          <p>No events scheduled at this venue.</p>
-        )}
-      </div>
-
-      {/* Comments Section */}
-      <div className="comments-section">
-        <h3>Comments:</h3>
-        {comments.length === 0 ? (
-          <p>No comments yet. Be the first to comment!</p>
-        ) : (
-          <ul className="comments-list">
-            {comments.map((comment) => (
-              <li key={comment._id}>
-                <strong>{comment.user}</strong>: {comment.text}
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {/* Add Comment Form */}
-        <div className="comment-form">
-          <textarea
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            placeholder="Add your comment here..."
-            rows="3"
-          />
-          <button onClick={addComment}>Submit Comment</button>
+        {/* Events List */}
+        <div className="events-section">
+          <h3>Events at this Venue:</h3>
+          {events.length > 0 ? (
+            <ul className="events-list">
+              {events.map((e) => (
+                <li key={e._id}>{e.titlee}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No events scheduled at this venue.</p>
+          )}
         </div>
-      </div>
 
+        {/* Comments Section */}
+        <div className="comments-section">
+          <h3>Comments:</h3>
+          {comments.length === 0 ? (
+            <p>No comments yet. Be the first to comment!</p>
+          ) : (
+            <ul className="comments-list">
+              {comments.map((comment) => (
+                <li key={comment._id}>
+                  <strong>{comment.user}</strong>: {comment.text}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {/* Add Comment Form */}
+          <div className="comment-form">
+            <textarea
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Add your comment here..."
+              rows="3"
+            />
+            <button onClick={addComment}>Submit Comment</button>
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -3,53 +3,90 @@
 /* Container for the Events component */
 .events-container {
     padding: 2rem;
-    background-color: #f9f9f9;
     min-height: 100vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Light theme */
+.events-container.light {
+    background-color: #f9f9f9;
+    color: #333333;
+}
+
+/* Dark theme */
+.events-container.dark {
+    background-color: #333333;
+    color: #f9f9f9;
 }
 
 /* Header Section */
 .events-header {
     text-align: center;
     margin-bottom: 2rem;
+}
+
+/* Specific color for the header in light and dark themes */
+.events-container.light .events-header {
     color: #333333;
 }
 
-    .events-header h2 {
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-    }
+.events-container.dark .events-header {
+    color: #f9f9f9;
+}
 
-    .events-header p {
-        font-size: 1.2rem;
-        color: #555555;
-    }
+.events-header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.events-header p {
+    font-size: 1.2rem;
+    color: #555555;
+}
 
 /* Events Table */
 .events-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #ffffff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-    .events-table th,
-    .events-table td {
-        padding: 1rem;
-        text-align: left;
-        border-bottom: 1px solid #dddddd;
-        font-size: 1rem;
-        color: #333333;
-    }
+/* Light theme styles */
+.events-container.light .events-table {
+    background-color: #ffffff;
+    color: #333333;
+}
 
-    .events-table th {
-        background-color: #f2f2f2;
-        font-weight: 600;
-    }
+.events-container.light .events-table th {
+    background-color: #f2f2f2;
+}
 
-    .events-table tr:hover {
-        background-color: #f1f1f1;
-    }
+.events-container.light .events-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Dark theme styles */
+.events-container.dark .events-table {
+    background-color: #444444;
+    color: #f9f9f9;
+}
+
+.events-container.dark .events-table th {
+    background-color: #555555;
+}
+
+.events-container.dark .events-table tr:hover {
+    background-color: #555555;
+    color: #f9f9f9;
+}
+
+.events-table th,
+.events-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+    font-size: 1rem;
+}
 
 /* Pagination Styles */
 .pagination {
@@ -60,28 +97,28 @@
     margin-top: 1.5rem;
 }
 
-    .pagination button {
-        padding: 0.5rem 1rem;
-        background-color: #007bff;
-        color: #ffffff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
+.pagination button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-        .pagination button:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-        }
+.pagination button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
 
-        .pagination button:hover:not(:disabled) {
-            background-color: #0056b3;
-        }
+.pagination button:hover:not(:disabled) {
+    background-color: #0056b3;
+}
 
-    .pagination span {
-        color: #555555;
-    }
+.pagination span {
+    color: #555555;
+}
 
 /* Loading Indicator */
 .loading {
@@ -132,7 +169,7 @@
         gap: 0.5rem;
     }
 
-        .pagination button {
-            width: 100%;
-        }
+    .pagination button {
+        width: 100%;
+    }
 }

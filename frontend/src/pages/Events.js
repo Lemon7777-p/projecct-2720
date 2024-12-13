@@ -2,10 +2,12 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../AuthContext';
+import { ThemeContext } from '../ThemeContext'; // Import the ThemeContext
 import './Events.css'; // Import the CSS file
 
 function Events() {
   const { token } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext); // Use the theme context
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -48,7 +50,7 @@ function Events() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="events-container">
+    <div className={`events-container ${theme}`}>
       {/* Header Section */}
       <div className="events-header">
         <h2>Events</h2>
@@ -74,7 +76,7 @@ function Events() {
             <thead>
               <tr>
                 <th scope="col">Title</th>
-				<th scope="col">Category</th>
+                <th scope="col">Category</th>
                 <th scope="col">Date</th>
                 <th scope="col">Venue</th>
               </tr>
@@ -84,14 +86,14 @@ function Events() {
                 currentEvents.map((e) => (
                   <tr key={e._id}>
                     <td>{e.titlee}</td>
-					<td>{e.cat1}</td>
+                    <td>{e.cat1}</td>
                     <td>{e.predateE}</td> {/* Displaying date as string */}
                     <td>{e.venueid}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="3" className="no-events-message">
+                  <td colSpan="4" className="no-events-message">
                     No events found.
                   </td>
                 </tr>
