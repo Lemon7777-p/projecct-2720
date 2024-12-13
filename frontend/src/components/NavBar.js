@@ -2,11 +2,13 @@
 
 import React, { useContext } from 'react';
 import { AuthContext } from '../AuthContext';
+import { ThemeContext } from '../ThemeContext'; // Import ThemeContext
 import { Link, useLocation } from 'react-router-dom';
 import './NavBar.css'; // Import the CSS file
 
 function NavBar() {
   const { username, logout, role } = useContext(AuthContext);
+  const { theme, toggleTheme } = useContext(ThemeContext); // Use ThemeContext
   const location = useLocation();
 
   // Function to determine if the link is active
@@ -15,7 +17,7 @@ function NavBar() {
   };
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${theme}`}>
       {/* Branding Section */}
       <Link to="/" className="navbar-brand">
         Cultural Programme Finder
@@ -57,6 +59,11 @@ function NavBar() {
             </Link>
           </li>
         )}
+        <li>
+          <button onClick={toggleTheme} className="theme-toggle-btn">
+            Toggle
+          </button>
+        </li>
       </ul>
 
       {/* Authentication Section */}

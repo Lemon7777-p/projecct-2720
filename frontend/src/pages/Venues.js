@@ -3,9 +3,11 @@ import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../AuthContext';
 import { Link } from 'react-router-dom';
 import './Venues.css'; // Import the CSS file
+import { ThemeContext } from '../ThemeContext';
 
 function Venues() {
   const { token } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext); // night mode
   const [venues, setVenues] = useState([]);
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('');
@@ -107,7 +109,7 @@ function Venues() {
   };
 
   return (
-    <div className="venues-container">
+    <div className={`venues-container ${theme}`}>
       <h2 className="venues-header">Venues</h2>
 
       <div className="venues-filters">

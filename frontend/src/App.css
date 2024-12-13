@@ -1,0 +1,12 @@
+/* src/App.css */
+  .app.light {
+    background-color: white;
+    color: black;
+  }
+  
+  .app.dark {
+    background-color: #333333;
+    color: white;
+  }
+
+  

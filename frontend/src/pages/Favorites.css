@@ -3,61 +3,90 @@
 /* Container for the Favorites component */
 .favorites-container {
     padding: 2rem;
-    background-color: #f9f9f9;
     min-height: 100vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Light theme */
+.favorites-container.light {
+    background-color: #f9f9f9;
+    color: #333333;
+}
+
+/* Dark theme */
+.favorites-container.dark {
+    background-color: #333333;
+    color: #f9f9f9;
 }
 
 /* Header Section */
 .favorites-header {
     text-align: center;
     margin-bottom: 2rem;
+}
+
+/* Specific color for the header in light and dark themes */
+.favorites-container.light .favorites-header {
     color: #333333;
 }
 
-    .favorites-header h2 {
-        font-size: 2rem;
-        margin-bottom: 0.5rem;
-    }
+.favorites-container.dark .favorites-header {
+    color: #f9f9f9;
+}
 
-    .favorites-header p {
-        font-size: 1.2rem;
-        color: #555555;
-    }
+.favorites-header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.favorites-header p {
+    font-size: 1.2rem;
+    color: #555555;
+}
 
 /* Favorites Table */
 .favorites-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #ffffff;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-    .favorites-table caption {
-        caption-side: top;
-        text-align: center;
-        font-size: 1.2rem;
-        margin-bottom: 1rem;
-        color: #333333;
-    }
+/* Light theme styles */
+.favorites-container.light .favorites-table {
+    background-color: #ffffff;
+    color: #333333;
+}
 
-    .favorites-table th,
-    .favorites-table td {
-        padding: 1rem;
-        text-align: left;
-        border-bottom: 1px solid #dddddd;
-        font-size: 1rem;
-        color: #333333;
-    }
+.favorites-container.light .favorites-table th {
+    background-color: #f2f2f2;
+}
 
-    .favorites-table th {
-        background-color: #f2f2f2;
-        font-weight: 600;
-    }
+.favorites-container.light .favorites-table tr:hover {
+    background-color: #f1f1f1;
+}
 
-    .favorites-table tr:hover {
-        background-color: #f1f1f1;
-    }
+/* Dark theme styles */
+.favorites-container.dark .favorites-table {
+    background-color: #444444;
+    color: #f9f9f9;
+}
+
+.favorites-container.dark .favorites-table th {
+    background-color: #555555;
+}
+
+.favorites-container.dark .favorites-table tr:hover {
+    background-color: #555555;
+    color: #f9f9f9;
+}
+
+.favorites-table th,
+.favorites-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #dddddd;
+    font-size: 1rem;
+}
 
 /* Action Buttons */
 .remove-button {
@@ -70,10 +99,10 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-    .remove-button:hover {
-        background-color: #c82333;
-        transform: scale(1.02);
-    }
+.remove-button:hover {
+    background-color: #c82333;
+    transform: scale(1.02);
+}
 
 /* Loading Indicator */
 .loading {

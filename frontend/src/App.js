@@ -1,5 +1,7 @@
 // src/App.js
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from './ThemeContext';
+import './App.css';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, AuthContext } from './AuthContext';
 import NavBar from './components/NavBar';
@@ -25,20 +27,24 @@ function PrivateRoute({ children, requireAdmin = false }) {
 }
 
 function App() {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <AuthProvider>
       <Router>
-        <NavBar />
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<HomePage />} />
-          <Route path="/venue" element={<PrivateRoute><Venues /></PrivateRoute>} />
-          <Route path="/events" element={<PrivateRoute><Events /></PrivateRoute>} />
-          <Route path="/map" element={<PrivateRoute><MapPage /></PrivateRoute>} />
-          <Route path="/favorites" element={<PrivateRoute><Favorites /></PrivateRoute>} />
-          <Route path="/venue/:id" element={<PrivateRoute><VenueDetails /></PrivateRoute>} />
-          <Route path="/admin" element={<PrivateRoute requireAdmin={true}><Admin /></PrivateRoute>} />
-        </Routes>
+        <div className={`app ${theme}`}>
+          <NavBar />
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/venue" element={<PrivateRoute><Venues /></PrivateRoute>} />
+            <Route path="/events" element={<PrivateRoute><Events /></PrivateRoute>} />
+            <Route path="/map" element={<PrivateRoute><MapPage /></PrivateRoute>} />
+            <Route path="/favorites" element={<PrivateRoute><Favorites /></PrivateRoute>} />
+            <Route path="/venue/:id" element={<PrivateRoute><VenueDetails /></PrivateRoute>} />
+            <Route path="/admin" element={<PrivateRoute requireAdmin={true}><Admin /></PrivateRoute>} />
+          </Routes>
+        </div>
       </Router>
     </AuthProvider>
   );
