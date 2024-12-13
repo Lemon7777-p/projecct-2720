@@ -1,9 +1,11 @@
 // src/pages/Admin.js
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../AuthContext';
+import { ThemeContext } from '../ThemeContext'; // Import ThemeContext
 
 function Admin() {
   const { token } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext); // Get current theme
   const [events, setEvents] = useState([]);
   const [users, setUsers] = useState([]);
   const [newEvent, setNewEvent] = useState({ titlee: '', venueid: '', predateE: '', cat1: '' });
@@ -120,7 +122,8 @@ function Admin() {
   };
 
   return (
-    <div style={{ padding: '2rem', fontFamily: 'Arial, sans-serif' }}>
+    // Apply theme classes to container
+    <div className={`admin-container ${theme}`} style={{ padding: '2rem', fontFamily: 'Arial, sans-serif' }}>
       <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>Admin Panel</h2>
 
       {/* Manage Events Section */}
@@ -169,24 +172,24 @@ function Admin() {
               placeholder="Title"
               value={editEvent.titlee}
               onChange={(e) => setEditEvent({ ...editEvent, titlee: e.target.value })}
-              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+              style={{ display: 'block', marginBottom: '1rem', width: '100%' }}
             />
             <input
               placeholder="Venue ID"
               value={editEvent.venueid}
               onChange={(e) => setEditEvent({ ...editEvent, venueid: e.target.value })}
-              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+              style={{ display: 'block', marginBottom: '1rem', width: '100%' }}
             />
             <input
               placeholder="Date"
               value={editEvent.predateE}
               onChange={(e) => setEditEvent({ ...editEvent, predateE: e.target.value })}
-              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+              style={{ display: 'block', marginBottom: '1rem', width: '100%' }}
             />
             <select
-              value={editEvent.cat11}
+              value={editEvent.cat1}
               onChange={(e) => setEditEvent({ ...editEvent, cat1: e.target.value })}
-              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+              style={{ display: 'block', marginBottom: '1rem', width: '100%' }}
             >
               <option value="">Select Category</option>
               <option value="inc4">inc4</option>
@@ -205,24 +208,24 @@ function Admin() {
               placeholder="Title"
               value={newEvent.titlee}
               onChange={(e) => setNewEvent({ ...newEvent, titlee: e.target.value })}
-              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+              style={{ display: 'block', marginBottom: '1rem', width: '100%' }}
             />
             <input
               placeholder="Venue ID"
               value={newEvent.venueid}
               onChange={(e) => setNewEvent({ ...newEvent, venueid: e.target.value })}
-              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+              style={{ display: 'block', marginBottom: '1rem', width: '100%' }}
             />
             <input
               placeholder="Date"
               value={newEvent.predateE}
               onChange={(e) => setNewEvent({ ...newEvent, predateE: e.target.value })}
-              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+              style={{ display: 'block', marginBottom: '1rem', width: '100%' }}
             />
             <select
               value={newEvent.cat1}
               onChange={(e) => setNewEvent({ ...newEvent, cat1: e.target.value })}
-              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+              style={{ display: 'block', marginBottom: '1rem', width: '100%' }}
             >
               <option value="">Select Category</option>
               <option value="inc4">inc4</option>
@@ -276,19 +279,19 @@ function Admin() {
               placeholder="Username"
               value={editUser.username}
               onChange={(e) => setEditUser({ ...editUser, username: e.target.value })}
-              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+              style={{ display: 'block', marginBottom: '1rem', width: '100%' }}
             />
             <input
               placeholder="Password"
               type="password"
               value={editUser.password || ''}
               onChange={(e) => setEditUser({ ...editUser, password: e.target.value })}
-              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+              style={{ display: 'block', marginBottom: '1rem', width: '100%' }}
             />
             <select
               value={editUser.role}
               onChange={(e) => setEditUser({ ...editUser, role: e.target.value })}
-              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+              style={{ display: 'block', marginBottom: '1rem', width: '100%' }}
             >
               <option value="user">User</option>
               <option value="admin">Admin</option>
@@ -305,19 +308,19 @@ function Admin() {
               placeholder="Username"
               value={newUser.username}
               onChange={(e) => setNewUser({ ...newUser, username: e.target.value })}
-              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+              style={{ display: 'block', marginBottom: '1rem', width: '100%' }}
             />
             <input
               placeholder="Password"
               type="password"
               value={newUser.password}
               onChange={(e) => setNewUser({ ...newUser, password: e.target.value })}
-              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+              style={{ display: 'block', marginBottom: '1rem', width: '100%' }}
             />
             <select
               value={newUser.role}
               onChange={(e) => setNewUser({ ...newUser, role: e.target.value })}
-              style={{ display: 'block', marginBottom: '1rem', padding: '8px', width: '100%' }}
+              style={{ display: 'block', marginBottom: '1rem', width: '100%' }}
             >
               <option value="user">User</option>
               <option value="admin">Admin</option>

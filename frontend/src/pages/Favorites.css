@@ -7,17 +7,17 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Light theme */
-.favorites-container.light {
-    background-color: #f9f9f9;
-    color: #333333;
-}
+    /* Light theme */
+    .favorites-container.light {
+        background-color: #f9f9f9;
+        color: #333333;
+    }
 
-/* Dark theme */
-.favorites-container.dark {
-    background-color: #333333;
-    color: #f9f9f9;
-}
+    /* Dark theme */
+    .favorites-container.dark {
+        background-color: #222222;
+        color: #f9f9f9;
+    }
 
 /* Header Section */
 .favorites-header {
@@ -25,7 +25,6 @@
     margin-bottom: 2rem;
 }
 
-/* Specific color for the header in light and dark themes */
 .favorites-container.light .favorites-header {
     color: #333333;
 }
@@ -44,6 +43,10 @@
     color: #555555;
 }
 
+.favorites-container.dark .favorites-header p {
+    color: #cccccc;
+}
+
 /* Favorites Table */
 .favorites-table {
     width: 100%;
@@ -51,34 +54,37 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Light theme styles */
+/* Light theme styles for table */
 .favorites-container.light .favorites-table {
     background-color: #ffffff;
     color: #333333;
 }
 
-.favorites-container.light .favorites-table th {
-    background-color: #f2f2f2;
-}
+    .favorites-container.light .favorites-table th {
+        background-color: #f2f2f2;
+        color: #333333;
+    }
 
-.favorites-container.light .favorites-table tr:hover {
-    background-color: #f1f1f1;
-}
+    .favorites-container.light .favorites-table tr:hover {
+        background-color: #e0e0e0;
+        color: #333333;
+    }
 
-/* Dark theme styles */
+/* Dark theme styles for table */
 .favorites-container.dark .favorites-table {
     background-color: #444444;
     color: #f9f9f9;
 }
 
-.favorites-container.dark .favorites-table th {
-    background-color: #555555;
-}
+    .favorites-container.dark .favorites-table th {
+        background-color: #555555;
+        color: #f9f9f9;
+    }
 
-.favorites-container.dark .favorites-table tr:hover {
-    background-color: #555555;
-    color: #f9f9f9;
-}
+    .favorites-container.dark .favorites-table tr:hover {
+        background-color: #555555;
+        color: #f9f9f9;
+    }
 
 .favorites-table th,
 .favorites-table td {
@@ -86,6 +92,12 @@
     text-align: left;
     border-bottom: 1px solid #dddddd;
     font-size: 1rem;
+}
+
+/* Adjust border color in dark mode for better contrast */
+.favorites-container.dark .favorites-table th,
+.favorites-container.dark .favorites-table td {
+    border-bottom: 1px solid #666666;
 }
 
 /* Action Buttons */
@@ -99,10 +111,10 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.remove-button:hover {
-    background-color: #c82333;
-    transform: scale(1.02);
-}
+    .remove-button:hover {
+        background-color: #c82333;
+        transform: scale(1.02);
+    }
 
 /* Loading Indicator */
 .loading {
@@ -110,6 +122,10 @@
     color: #555555;
     font-size: 1.2rem;
     margin-top: 2rem;
+}
+
+.favorites-container.dark .loading {
+    color: #cccccc;
 }
 
 .spinner {
@@ -144,6 +160,10 @@
     padding: 1rem;
     color: #555555;
     font-size: 1rem;
+}
+
+.favorites-container.dark .no-favorites-message {
+    color: #cccccc;
 }
 
 /* Responsive Design */

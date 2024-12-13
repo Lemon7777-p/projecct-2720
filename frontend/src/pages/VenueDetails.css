@@ -1,37 +1,40 @@
 /* src/components/VenueDetails.css */
 
-/* Container for the Venue Details component */
+/* Base container for the Venue Details component */
 .venue-details-container {
     padding: 2rem;
     min-height: 100vh;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Light theme */
-.venue-details-container.light {
-    background-color: #f9f9f9;
-    color: #333333;
-}
+    /* Light theme */
+    .venue-details-container.light {
+        background-color: #f9f9f9;
+        color: #333333;
+    }
 
-/* Dark theme */
-.venue-details-container.dark {
-    background-color: #333333;
-    color: #f9f9f9;
-}
+    /* Dark theme */
+    .venue-details-container.dark {
+        background-color: #222222;
+        color: #f9f9f9;
+    }
 
 /* Header Section */
 .venue-header {
     text-align: center;
     margin-bottom: 2rem;
+}
+
+.venue-details-container.light .venue-header h2 {
     color: #333333;
 }
 
-/* Specific color for the header in light and dark themes */
-.venue-details-container.light .venue-header {
-    color: #333333;
+.venue-details-container.light .venue-header p {
+    color: #555555;
 }
 
-.venue-details-container.dark .venue-header {
+.venue-details-container.dark .venue-header h2,
+.venue-details-container.dark .venue-header p {
     color: #f9f9f9;
 }
 
@@ -42,7 +45,6 @@
 
 .venue-header p {
     font-size: 1.2rem;
-    color: #555555;
 }
 
 /* Map Section */
@@ -50,9 +52,13 @@
     width: 100%;
     height: 400px;
     margin-bottom: 2rem;
-    border: 1px solid #cccccc;
     border-radius: 8px;
     overflow: hidden;
+    border: 1px solid #cccccc;
+}
+
+.venue-details-container.dark .map-section {
+    border: 1px solid #555555;
 }
 
 /* Venue Information */
@@ -64,142 +70,118 @@
     justify-content: center;
 }
 
-/* Light theme styles for venue-info */
+    .venue-info div {
+        flex: 1 1 200px;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        color: #555555;
+    }
+
 .venue-details-container.light .venue-info div {
-    flex: 1 1 200px;
     background-color: #ffffff;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    color: #333333;
+    color: #555555;
 }
 
-.venue-details-container.light .venue-info div h3 {
+.venue-details-container.dark .venue-info div {
+    background-color: #444444;
+    color: #f9f9f9;
+}
+
+.venue-info div h3 {
     margin-bottom: 0.5rem;
     color: #007bff;
 }
 
-.venue-details-container.light .venue-info div p {
-    color: #555555;
-}
-
-/* Dark theme styles for venue-info */
-.venue-details-container.dark .venue-info div {
-    flex: 1 1 200px;
-    background-color: #444444;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+.venue-details-container.dark .venue-info div h3 {
     color: #f9f9f9;
 }
 
-.venue-details-container.dark .venue-info div h3 {
-    margin-bottom: 0.5rem;
-    color: #89cff0;
-}
-
-.venue-details-container.dark .venue-info div p {
-    color: #d3d3d3;
-}
-
+/* Events and Comments Container */
 .EventComentContainer {
     display: flex;
 }
 
-/* Events List */
+/* Events Section */
 .events-section {
     margin-bottom: 2rem;
     flex: 1;
-    color: #333333;
 }
 
-/* Specific color for events-section in light and dark themes */
-.venue-details-container.light .events-section h3 {
-    color: #333333;
-}
-
-.venue-details-container.dark .events-section h3 {
-    color: #f9f9f9;
-}
+    .events-section h3 {
+        margin-bottom: 1rem;
+        color: inherit; /* Will depend on light/dark parent */
+    }
 
 .events-list {
     list-style-type: disc;
     padding-left: 1.5rem;
 }
 
-.venue-details-container.light .events-list li {
-    margin-bottom: 0.5rem;
-    color: #555555;
-}
-
-.venue-details-container.dark .events-list li {
-    margin-bottom: 0.5rem;
-    color: #d3d3d3;
-}
+    .events-list li {
+        margin-bottom: 0.5rem;
+        color: inherit;
+    }
 
 /* Comments Section */
 .comments-section {
     margin-bottom: 2rem;
     flex: 1;
-    color: #333333;
 }
 
-/* Specific color for comments-section in light and dark themes */
-.venue-details-container.light .comments-section h3 {
-    color: #333333;
-}
-
-.venue-details-container.dark .comments-section h3 {
-    color: #f9f9f9;
-}
+    .comments-section h3 {
+        margin-bottom: 1rem;
+        color: inherit;
+    }
 
 .comments-list {
     list-style-type: none;
     padding: 0;
 }
 
-.venue-details-container.light .comments-list li {
-    background-color: #ffffff;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    color: #333333;
-}
-
-.venue-details-container.light .comments-list li strong {
-    color: #007bff;
-}
+    .comments-list li {
+        background-color: #ffffff;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        color: #333333;
+    }
 
 .venue-details-container.dark .comments-list li {
     background-color: #444444;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
     color: #f9f9f9;
 }
 
-.venue-details-container.dark .comments-list li strong {
-    color: #89cff0;
+.comments-list li strong {
+    color: #007bff;
 }
 
+/* Comment Form */
 .comment-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.comment-form textarea {
-    padding: 0.75rem;
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    resize: vertical;
-    font-size: 1rem;
+    .comment-form textarea {
+        padding: 0.75rem;
+        border: 1px solid #cccccc;
+        border-radius: 4px;
+        resize: vertical;
+        font-size: 1rem;
+        color: #333333;
+        background-color: #ffffff;
+    }
+
+.venue-details-container.dark .comment-form textarea {
+    background-color: #333333;
+    border: 1px solid #555555;
+    color: #f9f9f9;
 }
 
-/* Light theme styles for comment-form button */
-.venue-details-container.light .comment-form button {
+.comment-form button {
     align-self: flex-start;
     padding: 0.5rem 1rem;
     background-color: #28a745;
@@ -210,24 +192,12 @@
     transition: background-color 0.3s ease;
 }
 
-.venue-details-container.light .comment-form button:hover {
-    background-color: #218838;
-}
-
-/* Dark theme styles for comment-form button */
 .venue-details-container.dark .comment-form button {
-    align-self: flex-start;
-    padding: 0.5rem 1rem;
-    background-color: #34a853;
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    background-color: #28a745; /* still visible on dark background */
 }
 
-.venue-details-container.dark .comment-form button:hover {
-    background-color: #2e7d32;
+.comment-form button:hover {
+    background-color: #218838;
 }
 
 /* Error Message */
@@ -243,9 +213,9 @@
 /* Loading Indicator */
 .loading {
     text-align: center;
-    color: #555555;
     font-size: 1.2rem;
     margin-top: 2rem;
+    color: inherit;
 }
 
 /* Responsive Design */

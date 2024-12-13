@@ -1,12 +1,112 @@
 /* src/App.css */
-  .app.light {
-    background-color: white;
-    color: black;
-  }
-  
-  .app.dark {
-    background-color: #333333;
-    color: white;
-  }
 
-  
+/* Base Container */
+.app {
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+    /* Light theme */
+    .app.light {
+        background-color: #ffffff;
+        color: #000000;
+    }
+
+    /* Dark theme */
+    .app.dark {
+        background-color: #222222;
+        color: #f9f9f9;
+    }
+
+    /* Text and Element Colors */
+    .app.light h1, .app.light h2, .app.light h3, .app.light h4, .app.light h5, .app.light h6 {
+        color: #000000;
+    }
+
+    .app.dark h1, .app.dark h2, .app.dark h3, .app.dark h4, .app.dark h5, .app.dark h6 {
+        color: #f9f9f9;
+    }
+
+    /* Form Elements */
+    /* Inputs, text fields, and selects should adapt to theme. */
+    .app.light input[type="text"],
+    .app.light input[type="password"],
+    .app.light input[type="range"],
+    .app.light select,
+    .app.light textarea {
+        background-color: #ffffff;
+        color: #000000;
+        border: 1px solid #cccccc;
+    }
+
+    .app.dark input[type="text"],
+    .app.dark input[type="password"],
+    .app.dark input[type="range"],
+    .app.dark select,
+    .app.dark textarea {
+        background-color: #444444;
+        color: #f9f9f9;
+        border: 1px solid #666666;
+    }
+
+/* Focus states for inputs and selects */
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="range"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Buttons */
+button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Light Theme Buttons */
+.app.light button {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+    .app.light button:hover {
+        background-color: #0056b3;
+        transform: scale(1.02);
+    }
+
+/* Dark Theme Buttons */
+.app.dark button {
+    background-color: #3399ff;
+    color: #f9f9f9;
+}
+
+    .app.dark button:hover {
+        background-color: #1a8cff;
+        transform: scale(1.02);
+    }
+
+/* If you have any links that need theme adjustments: */
+.app.light a {
+    color: #007bff;
+}
+
+.app.dark a {
+    color: #66b3ff;
+}
+
+/* Responsive adjustments if needed can be placed here */
+.app.dark input,
+.app.dark select,
+.app.dark button {
+    background-color: #444444;
+    color: #f9f9f9;
+    border: 1px solid #666666;
+}
