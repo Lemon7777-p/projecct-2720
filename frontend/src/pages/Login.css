@@ -1,35 +1,63 @@
 /* src/pages/Login.css */
 
+/* Container for the entire Login component */
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    min-height: 100vh;
 }
 
+    /* Light theme */
+    .login-container.light {
+        background-color: #f9f9f9;
+        color: #333333;
+    }
+
+    /* Dark theme */
+    .login-container.dark {
+        background-color: #222222;
+        color: #f9f9f9;
+    }
+
+/* Login Card */
 .login-card {
     background-color: #ffffff;
     padding: 2.5rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 90%;
-    max-width: 350px; /* Reduced max-width for narrower input fields */
+    max-width: 350px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-    .login-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
+/* Adjust login-card colors for dark theme */
+.login-container.dark .login-card {
+    background-color: #333333; /* Dark background for the card */
+    color: #f9f9f9; /* Light text for better visibility */
+}
 
-    .login-card h2 {
-        margin-bottom: 1.5rem;
-        color: #333333;
-        text-align: center;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+.login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
 
+.login-card h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Adjust heading color based on theme */
+.login-container.light .login-card h2 {
+    color: #333333;
+}
+
+.login-container.dark .login-card h2 {
+    color: #f9f9f9;
+}
+
+/* Error Message */
 .error-message {
     color: #d8000c;
     background-color: #ffbaba;
@@ -40,40 +68,55 @@
     font-size: 0.9rem;
 }
 
+/* Form Group */
 .form-group {
     margin-bottom: 1.25rem;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the input fields */
+    align-items: center;
 }
 
     .form-group label {
         display: block;
         margin-bottom: 0.5rem;
-        color: #555555;
         font-weight: 500;
         font-size: 1rem;
+        color: #555555;
     }
 
-    .form-group input {
-        width: 90%; /* Reduce the width from 100% to 90% */
-        max-width: 250px; /* Further reduced max-width */
-        padding: 0.75rem 1rem;
-        border: 1px solid #cccccc;
-        border-radius: 4px;
-        font-size: 1rem;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
+/* Dark theme for labels */
+.login-container.dark .form-group label {
+    color: #f9f9f9;
+}
 
-        .form-group input:focus {
-            border-color: #007bff;
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        }
+.form-group input {
+    width: 90%;
+    max-width: 250px;
+    padding: 0.75rem 1rem;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #ffffff;
+    color: #333333;
+}
 
+/* Dark theme input fields */
+.login-container.dark .form-group input {
+    background-color: #444444;
+    border: 1px solid #666666;
+    color: #f9f9f9;
+}
+
+.form-group input:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Login Button */
 .login-button {
-    /* Remove width: 100%; */
-    max-width: 250px; /* Match the input fields' max-width */
+    max-width: 250px;
     padding: 0.75rem;
     background-color: #007bff;
     color: #ffffff;
@@ -82,8 +125,8 @@
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    display: block; /* Make it a block-level element */
-    margin: 0 auto; /* Center the button */
+    display: block;
+    margin: 0 auto;
 }
 
     .login-button:hover {
@@ -91,19 +134,29 @@
         transform: scale(1.02);
     }
 
+/* Adjust button styles for dark theme if needed */
+.login-container.dark .login-button {
+    background-color: #3399ff; /* Slightly lighter blue for dark mode */
+}
+
+    .login-container.dark .login-button:hover {
+        background-color: #1a8cff;
+    }
+
+/* Responsive Design */
 @media (max-width: 480px) {
     .login-card {
         padding: 2rem 1.5rem;
-        max-width: 90%; /* Allow more flexibility on small screens */
+        max-width: 90%;
     }
 
     .form-group input {
-        width: 100%; /* On small screens, make inputs full width */
+        width: 100%;
         max-width: none;
     }
 
     .login-button {
         max-width: none;
-        width: 100%; /* Make button full width on small screens */
+        width: 100%;
     }
 }

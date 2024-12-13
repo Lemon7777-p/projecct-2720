@@ -2,12 +2,14 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
+import { ThemeContext } from '../ThemeContext'; // Import the ThemeContext
 import './Login.css'; // Import the CSS file
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext); // Get the current theme (light/dark)
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -39,7 +41,8 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
+    // Apply theme classes to the container just like in Venues.css
+    <div className={`login-container ${theme}`}>
       <div className="login-card">
         <h2>Login</h2>
         {error && <div className="error-message">{error}</div>}
