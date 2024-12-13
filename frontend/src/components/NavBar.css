@@ -50,17 +50,24 @@
         font-size: 1rem;
         transition: color 0.3s ease;
         color: inherit; /* Inherit based on theme */
+        padding: 0.25rem 0.5rem; /* Added padding to match button */
+        border-radius: 4px; /* Optional: for better hover effect */
+        display: flex;
+        align-items: center; /* Vertically center text */
+        height: 100%; /* Ensure the link takes full height */
     }
 
         .nav-links a:hover,
         .nav-links a:focus {
             color: #007bff;
+            background-color: rgba(0, 123, 255, 0.1); /* Optional: subtle background on hover */
         }
 
         /* Active Link */
         .nav-links a.active {
             color: #007bff;
             font-weight: 600;
+            background-color: rgba(0, 123, 255, 0.2); /* Optional: distinct background for active link */
         }
 
 /* Authentication Section */
@@ -124,7 +131,7 @@
         .nav-links a {
             display: block;
             width: 100%;
-            padding: 0.5rem 0;
+            padding: 0.5rem 0; /* Adjust padding for mobile view */
         }
 
     .auth-section {

@@ -60,8 +60,8 @@ function NavBar() {
           </li>
         )}
         <li>
-          <button onClick={toggleTheme} className="theme-toggle-btn">
-            Toggle
+          <button onClick={toggleTheme} className="theme-toggle-btn" aria-label="Toggle Theme">
+            {theme === 'light' ? 'Light mode' : 'Dark mode'}
           </button>
         </li>
       </ul>
