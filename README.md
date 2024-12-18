@@ -4,7 +4,6 @@
 
 ```
 npm install axios express mongoose cors jsonwebtoken bcrypt
-node loadData.js
 npm start
 ```
 ## frontend setup:
