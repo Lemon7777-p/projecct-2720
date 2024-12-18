@@ -42,10 +42,13 @@ function Events() {
 
   // Format the login time to HH:MM:SS
   const formatLoginTime = (time) => {
+    const year = time.getFullYear().toString().padStart(2, '0');
+    const month = (time.getMonth()+1).toString().padStart(2, '0');
+    const day = time.getDate().toString().padStart(2, '0');
     const hours = time.getHours().toString().padStart(2, '0');
     const minutes = time.getMinutes().toString().padStart(2, '0');
     const seconds = time.getSeconds().toString().padStart(2, '0');
-    return `${hours}:${minutes}:${seconds}`;
+    return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`;
   };
 
   // Calculate the events to display on the current page
