@@ -1,4 +1,4 @@
-const fs = require('fs');
+const axios = require('axios'); // to fetch remote XML data
 const mongoose = require('mongoose');
 const xml2js = require('xml2js');
 
@@ -11,57 +11,65 @@ mongoose.connect(MONGO_URI)
   .then(() => console.log('MongoDB connected for data loading'))
   .catch(err => console.error(err));
 
+const EVENTS_XML_URL = 'https://www.lcsd.gov.hk/datagovhk/event/events.xml';
+const VENUES_XML_URL = 'https://www.lcsd.gov.hk/datagovhk/event/venues.xml';
+
 async function loadEvents() {
-  const xmlData = fs.readFileSync('./events.xml', 'utf8');
-  const parser = new xml2js.Parser({ explicitArray: false, trim: true });
-  const result = await parser.parseStringPromise(xmlData);
+  try {
+    const response = await axios.get(EVENTS_XML_URL);
+    const xmlData = response.data;
 
-  // Uncomment this to inspect the structure
-  // console.log("Events result:", JSON.stringify(result, null, 2));
+    const parser = new xml2js.Parser({ explicitArray: false, trim: true });
+    const result = await parser.parseStringPromise(xmlData);
 
-  let eventsArray = result.events.event;
-  if (!Array.isArray(eventsArray)) {
-    eventsArray = [eventsArray];
+    let eventsArray = result.events.event;
+    if (!Array.isArray(eventsArray)) {
+      eventsArray = [eventsArray];
+    }
+
+    const eventsToInsert = eventsArray.map(e => ({
+      titlee: e.titlee || '',
+      cat1: e.cat1 || '',
+      venueid: e.venueid || '',
+      predateE: e.predateE || '',
+      desce: e.desce || '',
+      presenterorge: e.presenterorge || ''
+    }));
+
+    await Event.deleteMany({});
+    await Event.insertMany(eventsToInsert);
+    console.log(`Inserted ${eventsToInsert.length} events.`);
+  } catch (err) {
+    console.error('Error loading events:', err);
   }
-
-  // Assuming xml2js returns the fields as strings directly:
-  const eventsToInsert = eventsArray.map(e => ({
-    titlee: e.titlee || '',
-	cat1: e.cat1 || '',
-    venueid: e.venueid || '',
-    predateE: e.predateE || '', 
-    desce: e.desce || '',
-    presenterorge: e.presenterorge || ''
-  }));
-
-  await Event.deleteMany({});
-  await Event.insertMany(eventsToInsert);
-  console.log(`Inserted ${eventsToInsert.length} events.`);
 }
 
 async function loadVenues() {
-  const xmlData = fs.readFileSync('./venues.xml', 'utf8');
-  const parser = new xml2js.Parser({ explicitArray: false, trim: true });
-  const result = await parser.parseStringPromise(xmlData);
+  try {
+    const response = await axios.get(VENUES_XML_URL);
+    const xmlData = response.data;
 
-  // Uncomment this to inspect the structure
-  // console.log("Venues result:", JSON.stringify(result, null, 2));
+    const parser = new xml2js.Parser({ explicitArray: false, trim: true });
+    const result = await parser.parseStringPromise(xmlData);
 
-  let venuesArray = result.venues.venue;
-  if (!Array.isArray(venuesArray)) {
-    venuesArray = [venuesArray];
+    let venuesArray = result.venues.venue;
+    if (!Array.isArray(venuesArray)) {
+      venuesArray = [venuesArray];
+    }
+
+    const venuesToInsert = venuesArray.map(v => ({
+      venueId: v.$.id,
+      venuee: v.venuee || '',
+      latitude: v.latitude || '',
+      longitude: v.longitude || ''
+    }));
+
+    await Venue.deleteMany({});
+    await Venue.insertMany(venuesToInsert);
+    console.log(`Inserted ${venuesToInsert.length} venues.`);
+  } catch (err) {
+    console.error('Error loading venues:', err);
   }
-
-  const venuesToInsert = venuesArray.map(v => ({
-    venueId: v.$.id,
-    venuee: v.venuee || '',
-    latitude: v.latitude || '',
-    longitude: v.longitude || ''
-  }));
-
-  await Venue.deleteMany({});
-  await Venue.insertMany(venuesToInsert);
-  console.log(`Inserted ${venuesToInsert.length} venues.`);
 }
 
 async function run() {
