@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -13,17 +12,25 @@ app.use(express.json());
 
 const MONGO_URI = 'mongodb://127.0.0.1:27017/my_events_db';
 
-mongoose.connect(MONGO_URI)
-  .then(() => console.log("MongoDB connected."))
-  .catch(err => console.error("MongoDB connection error:", err));
+// Wrap the connection in an async function and wait for the connection to be established
+const connectToDatabase = async () => {
+  try {
+    await mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    console.log("MongoDB connected.");
+  } catch (err) {
+    console.error("MongoDB connection error:", err);
+    process.exit(1);  // Exit the process if connection fails
+  }
+};
 
-app.use('/auth', authRoutes);
-app.use('/user', userActions);
-app.use('/admin', adminActions);
+// Connect to the database first before starting the server
+connectToDatabase().then(() => {
+  // After MongoDB connection is established, set up the routes
+  app.use('/auth', authRoutes);
+  app.use('/user', userActions);
+  app.use('/admin', adminActions);
 
-app.get('/', (req, res) => {
-  res.send('Server is running!');
+  // Start the server after connection
+  const PORT = process.env.PORT || 4000;
+  app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
 });
-
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));

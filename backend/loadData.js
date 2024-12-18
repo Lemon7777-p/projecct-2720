@@ -1,22 +1,14 @@
-const axios = require('axios'); // to fetch remote XML data
 const mongoose = require('mongoose');
 const xml2js = require('xml2js');
+const axios = require('axios');  // For fetching remote XML files
 
 const Event = require('./models/Event');
 const Venue = require('./models/Venue');
 
-const MONGO_URI = 'mongodb://127.0.0.1:27017/my_events_db';
-
-mongoose.connect(MONGO_URI)
-  .then(() => console.log('MongoDB connected for data loading'))
-  .catch(err => console.error(err));
-
-const EVENTS_XML_URL = 'https://www.lcsd.gov.hk/datagovhk/event/events.xml';
-const VENUES_XML_URL = 'https://www.lcsd.gov.hk/datagovhk/event/venues.xml';
-
+// Helper to load events from remote XML
 async function loadEvents() {
   try {
-    const response = await axios.get(EVENTS_XML_URL);
+    const response = await axios.get('https://www.lcsd.gov.hk/datagovhk/event/events.xml');
     const xmlData = response.data;
 
     const parser = new xml2js.Parser({ explicitArray: false, trim: true });
@@ -39,14 +31,15 @@ async function loadEvents() {
     await Event.deleteMany({});
     await Event.insertMany(eventsToInsert);
     console.log(`Inserted ${eventsToInsert.length} events.`);
-  } catch (err) {
-    console.error('Error loading events:', err);
+  } catch (error) {
+    console.error('Error loading events:', error);
   }
 }
 
+// Helper to load venues from remote XML
 async function loadVenues() {
   try {
-    const response = await axios.get(VENUES_XML_URL);
+    const response = await axios.get('https://www.lcsd.gov.hk/datagovhk/event/venues.xml');
     const xmlData = response.data;
 
     const parser = new xml2js.Parser({ explicitArray: false, trim: true });
@@ -67,20 +60,9 @@ async function loadVenues() {
     await Venue.deleteMany({});
     await Venue.insertMany(venuesToInsert);
     console.log(`Inserted ${venuesToInsert.length} venues.`);
-  } catch (err) {
-    console.error('Error loading venues:', err);
+  } catch (error) {
+    console.error('Error loading venues:', error);
   }
 }
 
-async function run() {
-  try {
-    await loadEvents();
-    await loadVenues();
-  } catch (err) {
-    console.error('Error loading data:', err);
-  } finally {
-    mongoose.connection.close();
-  }
-}
-
-run();
+module.exports = { loadEvents, loadVenues };
