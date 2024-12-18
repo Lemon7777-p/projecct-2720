@@ -19,6 +19,15 @@
     color: #f9f9f9;
 }
 
+.login-time {
+    font-size: 14px;
+    color: gray;
+    margin-top: 10px;
+    text-align: center; /* Center the text */
+    width: 100%; /* Ensure the element takes up the full width */
+    display: block; /* Make the element a block-level element */
+}
+
 /* Header Section */
 .events-header {
     text-align: center;

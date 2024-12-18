@@ -1,4 +1,5 @@
 // src/pages/Venues.js
+
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../AuthContext';
 import { Link } from 'react-router-dom';
@@ -6,7 +7,7 @@ import './Venues.css'; // Import the CSS file
 import { ThemeContext } from '../ThemeContext';
 
 function Venues() {
-  const { token } = useContext(AuthContext);
+  const { token, loginTime } = useContext(AuthContext); // Use loginTime from AuthContext
   const { theme } = useContext(ThemeContext); // night mode
   const [venues, setVenues] = useState([]);
   const [query, setQuery] = useState('');
@@ -108,9 +109,24 @@ function Venues() {
     }
   };
 
+  // Format the login time to HH:MM:SS
+  const formatLoginTime = (time) => {
+    const hours = time.getHours().toString().padStart(2, '0');
+    const minutes = time.getMinutes().toString().padStart(2, '0');
+    const seconds = time.getSeconds().toString().padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  };
+
   return (
     <div className={`venues-container ${theme}`}>
       <h2 className="venues-header">Venues</h2>
+
+      {/* Display login time if available */}
+      {loginTime ? (
+        <p className="login-time">Last Updated at: {formatLoginTime(loginTime)}</p>
+      ) : (
+        <p>Loading login time...</p>
+      )}
 
       <div className="venues-filters">
         {/* Search Bar */}

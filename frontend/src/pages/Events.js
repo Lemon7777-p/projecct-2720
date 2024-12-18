@@ -2,12 +2,12 @@
 
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../AuthContext';
-import { ThemeContext } from '../ThemeContext'; // Import the ThemeContext
-import './Events.css'; // Import the CSS file
+import { ThemeContext } from '../ThemeContext';
+import './Events.css';
 
 function Events() {
-  const { token } = useContext(AuthContext);
-  const { theme } = useContext(ThemeContext); // Use the theme context
+  const { token, loginTime } = useContext(AuthContext);  // Use loginTime from AuthContext
+  const { theme } = useContext(ThemeContext);  // Use the theme context
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -40,6 +40,14 @@ function Events() {
     fetchEvents();
   }, [token]);
 
+  // Format the login time to HH:MM:SS
+  const formatLoginTime = (time) => {
+    const hours = time.getHours().toString().padStart(2, '0');
+    const minutes = time.getMinutes().toString().padStart(2, '0');
+    const seconds = time.getSeconds().toString().padStart(2, '0');
+    return `${hours}:${minutes}:${seconds}`;
+  };
+
   // Calculate the events to display on the current page
   const indexOfLastEvent = currentPage * eventsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
@@ -54,7 +62,13 @@ function Events() {
       {/* Header Section */}
       <div className="events-header">
         <h2>Events</h2>
-        <p>Browse through the list of upcoming events.</p>
+        
+        {/* Display login time if available */}
+        {loginTime ? (
+          <p className="login-time">Last Updated at: {formatLoginTime(loginTime)}</p>
+        ) : (
+          <p>Loading login time...</p>
+        )}
       </div>
 
       {/* Loading Indicator */}
