@@ -3,7 +3,7 @@
 ## backend setup:
 
 ```
-npm install express mongoose cors jsonwebtoken bcrypt
+npm install axios express mongoose cors jsonwebtoken bcrypt
 node loadData.js
 npm start
 ```
